@@ -202,8 +202,8 @@ bool roundBufferDimensionNearest(int32_t width, int32_t height,
     }
 
     if (isPriviledgedClient == true && bestWidth == -1 &&
-        (format == HAL_PIXEL_FORMAT_RAW10 || format == HAL_PIXEL_FORMAT_RAW12 ||
-         format == HAL_PIXEL_FORMAT_RAW16 || format == HAL_PIXEL_FORMAT_RAW_OPAQUE)) {
+            (format == HAL_PIXEL_FORMAT_RAW10 || format == HAL_PIXEL_FORMAT_RAW12 ||
+            format == HAL_PIXEL_FORMAT_RAW16 || format == HAL_PIXEL_FORMAT_RAW_OPAQUE)) {
         bool isLogicalCamera = false;
         auto entry = info.find(ANDROID_REQUEST_AVAILABLE_CAPABILITIES);
         for (size_t i = 0; i < entry.count; ++i) {
@@ -225,10 +225,9 @@ bool roundBufferDimensionNearest(int32_t width, int32_t height,
     // requirement. AIDE2 is vendor enhanced feature which requires special resolutions and
     // those are not populated in static capabilities.
     if (isPriviledgedClient == true &&
-        (format == HAL_PIXEL_FORMAT_YCbCr_420_888 || format == HAL_PIXEL_FORMAT_BLOB)) {
+            (format == HAL_PIXEL_FORMAT_YCbCr_420_888 || format == HAL_PIXEL_FORMAT_BLOB)) {
         ALOGI("Bypass roundBufferDimensionNearest for privilegedClient YUV streams "
-              "width %d height %d for format %d",
-              width, height, format);
+                "width %d height %d for format %d", width, height, format);
 
         bestWidth  = width;
         bestHeight = height;
@@ -717,7 +716,7 @@ convertToHALStreamCombination(
         metadataGetter getMetadata, const std::vector<std::string> &physicalCameraIds,
         aidl::android::hardware::camera::device::StreamConfiguration &streamConfiguration,
         bool overrideForPerfClass, metadata_vendor_id_t vendorTagId,
-        bool checkSessionParams, bool isPriviledgedClient, bool *earlyExit) {
+        bool checkSessionParams, bool *earlyExit, bool isPriviledgedClient) {
     using SensorPixelMode = aidl::android::hardware::camera::metadata::SensorPixelMode;
     auto operatingMode = sessionConfiguration.getOperatingMode();
     binder::Status res = checkOperatingMode(operatingMode, deviceInfo,
